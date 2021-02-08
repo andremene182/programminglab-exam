@@ -5,7 +5,6 @@ from statistics import mean
 class ExamException(Exception):
   pass
 
-
 # Class CSVTimeSeriesFile
 class CSVTimeSeriesFile:
 
@@ -17,7 +16,6 @@ class CSVTimeSeriesFile:
   # function getData
   # @returns csvValues -> a list of list in format [epoch, temperature]
   def getData(self):
-
 
     # Open the file, if it's possible
     try:
@@ -71,8 +69,6 @@ def calculate_single_day_stats(day_temps):
 # @returns stats -> list of list min, max and avg temperature per day
 def daily_stats(time_series):
 
-
-
   # Verify if there are duplicates epochs
   time_series_epochs = [item[0] for item in time_series]
   time_series_epochs_set = set(time_series_epochs)
@@ -83,7 +79,6 @@ def daily_stats(time_series):
   stats = []
   day_temps = []
   days = []
-  daysCount = 0
   new_day = None
 
   
@@ -93,7 +88,6 @@ def daily_stats(time_series):
     epoch = item[0]
     temp = item[1]
     
-
     # Verify if epochs are in ascending order
     if(item != time_series[0] and epoch < time_series[i-1][0]):
       raise ExamException("The epoch '{}' is not in ascending order.".format(epoch))
@@ -103,11 +97,8 @@ def daily_stats(time_series):
       new_day = epoch
       days.append(new_day)
       
-      
       if (day_temps and i!=0):
         stats.append(calculate_single_day_stats(day_temps))
-
-      daysCount += 1
 
     # New Day Init
       day_temps = []
